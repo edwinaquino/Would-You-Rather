@@ -9,7 +9,8 @@ import { Link } from 'react-router-dom';
 // function that recives classes name avatarImg id and timestamp
 // and returns the html for a "Card"
 function UserCard(classes, name, avatarImg, id, timestamp) {
-    console.log(timestamp);
+    //alert('Dashboard.js');
+    //console.log(timestamp);
     let url = '/question/:id' + id;
     let date = new Date(timestamp);
     return (
@@ -89,7 +90,7 @@ function Dashboard(props) {
             allQuestions[firstElement].timestamp
     );
 
-    const classes = useStyles();
+    const classes = ""
     return (
         <div className={classes.root}>
             <div id="Paper" elevation={10} className={classes.container}>

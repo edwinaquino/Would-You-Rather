@@ -6,50 +6,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleAddQuestion } from '../actions/Questions';
 import { Link } from 'react-router-dom';
-// styles
-const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        '& > *': {
-            margin: theme.spacing(1),
-            width: theme.spacing(16),
-            height: theme.spacing(16),
-        },
-    },
-    container: {
-        position: 'absolute',
-        left: '50%',
-        top: '100px',
-        transform: 'translate(-50%, 0%)',
-        width: '700px',
-        height: '400px',
-        color: 'white',
-        backgroundColor: '#1E2125',
-        border: '1px solid #6c757d',
-        fontFamily: 'Montserrat',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-    },
-    textField: {
-        width: '100%',
-        color: 'white',
-    },
-    splitLine: {
-        marginTop: '15px',
-        marginBottom: '15px',
-        display: 'flex',
-        fontSize: '20px',
-    },
-    btn: {
-        marginTop: '20px',
-        width: '100%',
-    },
-}));
+
 
 
 function NewQuestion(props) {
-    const classes = useStyles();
+    const classes = ""
     // react.UseState to save the user input text for both options
     const [option1, setUser] = React.useState('');
     const [option2, setUser2] = React.useState('');
@@ -115,7 +76,7 @@ function NewQuestion(props) {
                 </span>
 
                 <form>
-                    <CustomTextField
+                <input data-id="CustomTextField2"
                         spellCheck="false"
                         autoComplete="off"
                         className={classes.textField}

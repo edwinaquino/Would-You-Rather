@@ -22,21 +22,21 @@ function UserCard(
     // code to make the "user player" background highlighted in the leaderboard
     let backgroundColor;
     if (authedUser === true) {
-        backgroundColor = '#0c1f33';
+        backgroundColor = 'green';
     } else {
-        backgroundColor = '#1E2125';
+        backgroundColor = 'white';
     }
     return (
         <div id="Card"
-            className={classes.card}
-            style={{ backgroundColor: backgroundColor }}
+            
+            style={{ backgroundColor: backgroundColor,width:"200px",border:"1px red solid",margin: "0px auto" }}
             key={name}
         >
             <div style={{ width: '200px', position: 'relative' }}>
-                <strong style={{ color: `${color}`, fontSize: '50px' }}>
+                <strong style={{ color: `${color}`, fontSize: '20px' }}>
                     #{position}
                 </strong>
-                <div id="Avatar" src={avatarImg} className={classes.avatar}></div>
+                <div id="Avatar" src={avatarImg}><img src={avatarImg} style={{width:"50px"}}/></div>
                 <div className={classes.lineBreak}></div>
             </div>
             <div
@@ -52,7 +52,7 @@ function UserCard(
                     style={{
                         height: '1px',
                         width: '100%',
-                        backgroundColor: 'gainsboro',
+                       
                     }}
                 />
                 <h4 style={{ color: 'gainsboro' }}>
@@ -95,7 +95,7 @@ function LeaderBoard(props) {
     const authedUser = props.authedUser.id;
     const ids = props.leaderIds;
     const users = props.users;
-    const classes = useStyles();
+    const classes = ""
     // gold silver and bronze colors
     const colors = ['#f6d27b', '#C0C0C0', '#CD7F32'];
     return (

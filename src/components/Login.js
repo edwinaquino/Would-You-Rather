@@ -8,11 +8,12 @@ import { setAuthedUser } from '../actions/AuthenticatedUser';
 
 
 function Login(props) {
-    const classes = useStyles();
+    const classes = ""
     // use React.UseState to save the selected user
     const [user, setUser] = React.useState('');
     // function that interacts with the state
     const handleChange = (event) => {
+        //alert(event.target.value)
         setUser(event.target.value);
     };
     console.log(user);
@@ -20,8 +21,9 @@ function Login(props) {
         return (<div>loading... line 25 of login.js</div>);
     } else {
         return (
+            
             <div className={classes.title}>
-                <h1 style={{ marginBottom: '-5px' }}>Please Log-In</h1>
+                <h1 style={{ marginBottom: '-5px' }}>Please select user to login</h1>
                 <form id="FormControl" className={classes.formControl}>
                     <label id="InputLabel"
                         id="demo-simple-select-label"
@@ -52,7 +54,8 @@ function Login(props) {
                 </form>
                 <button
                     onClick={() => {
-                        console.log('submited');
+                         alert(user)
+                        //console.log('submited');
                         props.dispatch(setAuthedUser(user));
                     }}
                     className={classes.submit}

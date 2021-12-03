@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 // nav bar
 function NavBar(props) {
     let avatarImg = props.users[props.authedUserId].avatarURL;
-    const classes = useStyles();
+    const classes = ""
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
@@ -17,19 +17,11 @@ function NavBar(props) {
 
     return (
         <div id="Paper" className={classes.root}>
-            <div id="Tabs"
-                value={value}
-                onChange={handleChange}
-                indicatorColor="secondary"
-            >
-                <span id="Tab1"
-                    label="Dashboard"
-                    component={Link}
-                    to="/home"
-                    className={classes.navitem}
-                >Dashboard</span>
-                <span id="Tab2" label="Create Question" component={Link} to="/add" >Create Question</span>
-                <span id="Tab3" label="Leaderboard" component={Link} to="/leaderboard" >LeaderBoard</span>
+            <div id="Tabs">
+                <Link to="/home" >Dashboard</Link> | 
+                <Link to="/add" >Create Question</Link> | 
+                <Link to="/leaderboard" >LeaderBoard</Link> | 
+
             </div>
             <div
                 style={{

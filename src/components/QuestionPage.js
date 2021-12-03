@@ -8,7 +8,7 @@ import { Redirect } from 'react-router';
 
 
 function QuestionPage(props) {
-    const classes = useStyles();
+    const classes = ""
     // React.UseState to save user selection
     const [userOpinion, setUserOpinion] = React.useState('');
     // fnctions to change the state
