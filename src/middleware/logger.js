@@ -1,4 +1,4 @@
-// logger middleware, useful for debugging
+// Source: https://github.com/udacity/reactnd-chirper-app/blob/new-tweet-logic/src/middleware/logger.js
 const logger = (store) => (next) => (action) => {
     console.group(action.type);
     console.log('The action: ', action);
