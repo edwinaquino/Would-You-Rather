@@ -6,60 +6,65 @@ import { connect } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
+import Nav from 'react-bootstrap/Nav';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import CardGroup from 'react-bootstrap/CardGroup';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+
+
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json';
+TimeAgo.addDefaultLocale(en);
+
+const formatDate = (timestamp) => {
+  const timeAgo = new TimeAgo('en-US');
+  const date = new Date(timestamp);
+
+  return timeAgo.format(date);
+};
+
 // function that recives classes name avatarImg id and timestamp
 // and returns the html for a "Card"
-function UserCard(classes, name, avatarImg, id, timestamp) {
-    //alert('Dashboard.js');
-    //console.log(timestamp);
+function UserCard(classes, name, avatarImg, id, timestamp, optionOne = "", optionTwo = "", mode) {
+    //alert(mode);
+    console.log("Dashboard.js LINE 22", optionOne);
     let url = '/question/:id' + id;
-    let date = new Date(timestamp);
+
+  
+
     return (
-        <div id="Card" key={id} className={classes.card}>
-            <div style={{ width: '200px', position: 'relative' }}>
-                <div id="Avatar" src={avatarImg} className={classes.avatar}></div>
-                <div className={classes.lineBreak}></div>
-            </div>
-            <div
-                style={{
-                    width: '245px',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
-                    position: 'relative',
-                }}
-            >
-                <h2>{name} asks:</h2>
-                <div
-                    style={{
-                        height: '1px',
-                        width: '100%',
-                        backgroundColor: 'gainsboro',
-                    }}
-                />
-                <h4 style={{ color: 'gainsboro' }}>Would you Rather?</h4>
-                <button
-                    component={Link}
-                    to={url}
-                    variant="contained"
-                    color="primary"
-                    style={{ marginBottom: '20px' }}
-                >
-                    View Poll
-                </button>
-            </div>
-            <div
-                style={{
-                    width: '215px',
-                    marginTop: '15px',
-                    textAlign: 'right',
-                }}
-            >
-                {date.getDate() +
-                    '/' +
-                    (date.getMonth() + 1) +
-                    '/' +
-                    date.getFullYear()}
-            </div>
-        </div>
+        <>
+        
+
+            <Col>
+                <Card key={id} style={{ textAlign: "center" }} >
+                    <Card.Header style={{ textAlign: "right" }}>      <small className="text-muted">
+                        {formatDate(timestamp)}</small></Card.Header>
+                    <Image style={{ width: "200px", margin: "0 auto", padding: "10px" }} variant="top" src={avatarImg} roundedCircle />
+                    <Card.Body>
+                    <h3>{name}</h3>
+                        <Card.Title style={{ fontStyle: "italic" }}>Would you Rather...</Card.Title>
+                        <Card.Text>
+                            
+
+                            <p>{optionOne.text}</p>
+                            <p>or</p>
+                            <p>{optionTwo.text}?</p>
+                            <Link to={url} className="logoutButton NavLink btn btn-primary">{mode==="answered" ? "View Results " : "Give Answer"}</Link>
+                        </Card.Text>
+                    </Card.Body>
+
+                </Card>
+            </Col>
+
+
+
+
+        </>
     );
 }
 
@@ -92,25 +97,30 @@ function Dashboard(props) {
 
     const classes = ""
     return (
-        <div className={classes.root}>
-            <div id="Paper" elevation={10} className={classes.container}>
-                <button
-                    className={mode === 'answered' ? classes.notActive : ''}
-                    variant="contained"
-                    color="primary"
-                    onClick={changeToUnanswered}
-                >
-                    Unanswered
-                </button>
-                <button
-                    variant="contained"
-                    color="primary"
-                    className={mode === 'Unanswered' ? classes.notActive : ''}
-                    onClick={changeToAnswered}
-                >
-                    Answered
-                </button>
+
+        <>
+
+<h1 style={{ textAlign: 'center' }}>Dashboard - <span style={{textTransform: "capitalize"}}>{mode}</span></h1>
+            
+<Nav variant="pills" defaultActiveKey="link-1" style={{marginBottom: "15px"}}>
+  <Nav.Item>
+    <Nav.Link eventKey={mode === 'Unanswered' ? 'link-1' : 'disabled'} onClick={changeToUnanswered}>Unanswered</Nav.Link>
+  </Nav.Item>
+  <Nav.Item>
+    <Nav.Link eventKey={mode === 'Answered' ? 'disabled' : 'link-2'} onClick={changeToAnswered}>Answered</Nav.Link>
+  </Nav.Item>
+
+</Nav>         
+            
+
+
+            <Row xs={1} md={2} className="g-4">
+
+
+
                 {orderedQuestionsIds.map(function (key, index) {
+                    // {console.log("Dashboard.js Line 101. ", allQuestions[key])}
+
                     if (mode === 'Unanswered') {
                         // show unanswered questions
                         if (
@@ -124,7 +134,10 @@ function Dashboard(props) {
                                 allUsers[author].name,
                                 allUsers[author].avatarURL,
                                 allQuestions[key].id,
-                                allQuestions[key].timestamp
+                                allQuestions[key].timestamp,
+                                allQuestions[key].optionOne,
+                                allQuestions[key].optionTwo,
+                                mode
                             );
                         }
                     } else {
@@ -140,13 +153,27 @@ function Dashboard(props) {
                                 allUsers[author].name,
                                 allUsers[author].avatarURL,
                                 allQuestions[key].id,
-                                allQuestions[key].timestamp
+                                allQuestions[key].timestamp,
+                                allQuestions[key].optionOne,
+                                allQuestions[key].optionTwo,
+                                mode
                             );
                         }
                     }
                 })}
-            </div>
-        </div>
+
+
+
+
+
+
+            </Row>
+
+
+
+
+
+        </>
     );
 }
 // getting the answeredQuestions, all questions, and all users

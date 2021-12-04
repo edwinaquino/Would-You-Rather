@@ -2,6 +2,17 @@
 import React from 'react';
 
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import Table from 'react-bootstrap/Table';
+import Badge from 'react-bootstrap/Badge';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
+import CardGroup from 'react-bootstrap/CardGroup';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
+
+
 
 // function recives name, avatarImg, position, answeredQuestions, askedQuestions
 // color and authed User, and returns a card UI
@@ -27,66 +38,24 @@ function UserCard(
         backgroundColor = 'white';
     }
     return (
-        <div id="Card"
-            
-            style={{ backgroundColor: backgroundColor,width:"200px",border:"1px red solid",margin: "0px auto" }}
-            key={name}
-        >
-            <div style={{ width: '200px', position: 'relative' }}>
-                <strong style={{ color: `${color}`, fontSize: '20px' }}>
-                    #{position}
-                </strong>
-                <div id="Avatar" src={avatarImg}><img src={avatarImg} style={{width:"50px"}}/></div>
-                <div className={classes.lineBreak}></div>
-            </div>
-            <div
-                style={{
-                    width: '245px',
-                    paddingLeft: '20px',
-                    paddingRight: '20px',
-                    position: 'relative',
-                }}
-            >
-                <h2>{name}</h2>
-                <div
-                    style={{
-                        height: '1px',
-                        width: '100%',
-                       
-                    }}
-                />
-                <h4 style={{ color: 'gainsboro' }}>
-                    Answered questions:{' '}
-                    <strong style={{ color: '#5969C5' }}>{answeredQ}</strong>
-                </h4>
-                <h4 style={{ color: 'gainsboro' }}>
-                    Asked questions:{' '}
-                    <strong style={{ color: '#5969C5' }}>{askedQ}</strong>
-                </h4>
-                <div className={classes.lineBreak}></div>
-            </div>
-            <div
-                style={{
-                    position: 'relative',
-                    textAlign: 'center',
-                    width: '240px',
-                }}
-            >
-                <h2 style={{ textAlign: 'center' }}>Total score</h2>
-                <h2
-                    style={{
-                        marginLeft: '90px',
-                        backgroundColor: '#5969C5',
-                        width: '50px',
-                        height: '50px',
-                        borderRadius: '25px',
-                        lineHeight: '50px',
-                    }}
-                >
-                    {answeredQ + askedQ}
-                </h2>
-            </div>
-        </div>
+
+        <>
+
+
+
+            <tr>
+                <td><Image src={avatarImg} roundedCircle className="hdrAvatarImg" /></td>
+                <td> <h2> <Badge style={{ borderRadius: "30px" }} bg="primary">5</Badge></h2></td>
+
+                <td><h2> <Badge style={{ borderRadius: "30px" }} bg="info">{answeredQ}</Badge> </h2></td>
+                <td><h2> <Badge style={{ borderRadius: "30px" }} bg="warning">{askedQ}</Badge> </h2></td>
+            </tr>
+
+
+
+
+
+        </>
     );
 }
 
@@ -99,24 +68,41 @@ function LeaderBoard(props) {
     // gold silver and bronze colors
     const colors = ['#f6d27b', '#C0C0C0', '#CD7F32'];
     return (
-        <div className={classes.root}>
-            <div id="Paper" elevation={10} className={classes.container}>
-                {ids.map((element, index) =>
-                    UserCard(
-                        classes,
-                        users[element].name,
-                        users[element].avatarURL,
-                        index + 1,
-                        Object.keys(props.users[element].answers).length,
-                        users[element].questions.length,
-                        colors[index],
-                        users[authedUser].name === users[element].name
-                            ? true
-                            : false
-                    )
-                )}
-            </div>
-        </div>
+
+
+        <>
+            <h1 style={{ textAlign: 'center' }}>Leaderboard</h1>
+
+            <Table hover style={{ textAlign: "center" }}>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Total Score</th>
+
+                        <th>Answered Questions </th>
+                        <th>Created Questions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {ids.map((element, index) =>
+                        UserCard(
+                            classes,
+                            users[element].name,
+                            users[element].avatarURL,
+                            index + 1,
+                            Object.keys(props.users[element].answers).length,
+                            users[element].questions.length,
+                            colors[index],
+                            users[authedUser].name === users[element].name
+                                ? true
+                                : false
+                        )
+                    )}
+                </tbody>
+            </Table>
+
+
+        </>
     );
 }
 

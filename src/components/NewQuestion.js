@@ -8,8 +8,14 @@ import { handleAddQuestion } from '../actions/Questions';
 import { Link } from 'react-router-dom';
 
 
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 
 function NewQuestion(props) {
+    const [modalShow, setModalShow] = React.useState(false);
     const classes = ""
     // react.UseState to save the user input text for both options
     const [option1, setUser] = React.useState('');
@@ -25,93 +31,85 @@ function NewQuestion(props) {
     console.log(option2);
 
     return (
-        <div className={classes.root}>
-            <div id="Paper" elevation={10} className={classes.container}>
-                <h1 style={{ textAlign: 'center', color: '#dee2e6' }}>
-                    Create New Question
-                </h1>
-                <hr style={{ border: '1px solid #adb5bd' }} />
-                <h2 style={{ color: '#5969C5' }}>Would you Rather...</h2>
-                <form>
-                    <input data-id="CustomTextField"
-                        spellCheck="false"
-                        autoComplete="off"
-                        className={classes.textField}
-                        InputProps={{
-                            className: classes.textField,
-                        }}
-                        id="outlined-basic"
-                        label="option 1"
-                        variant="outlined"
-                        onChange={handleChange}
-                    />
-                </form>
-
-                <span className={classes.splitLine}>
-                    <span
-                        style={{
-                            transform: 'translatey(10px)',
-                            width: '48%',
-                            height: '1px',
-                            backgroundColor: '#6c757d',
-                        }}
-                    />
-                    <div
-                        style={{
-                            color: '#5969C5',
-                            marginRight: '15px',
-                            marginLeft: '15px',
-                        }}
-                    >
-                        OR
-                    </div>
-                    <span
-                        style={{
-                            transform: 'translatey(10px)',
-                            width: '48%',
-                            height: '1px',
-                            backgroundColor: '#6c757d',
-                        }}
-                    />
-                </span>
-
-                <form>
-                <input data-id="CustomTextField2"
-                        spellCheck="false"
-                        autoComplete="off"
-                        className={classes.textField}
-                        InputProps={{
-                            className: classes.textField,
-                        }}
-                        id="outlined-basic"
-                        label="option 2"
-                        variant="outlined"
-                        onChange={handleChange2}
-                    />
-                </form>
-                <button
-                    component={Link}
-                    to="/home"
-                    variant="contained"
-                    color="primary"
-                    className={classes.btn}
-                    onClick={() => {
-                        // validate if form was empty
-                        if (!(option1 === '' || option2 === '')) {
-                            props.dispatch(handleAddQuestion(option1, option2));
-                            console.log('submited');
-                        } else {
-                            console.log('form was empty');
-                        }
-                    }}
+        <>
+            <Form>
+                <h1 style={{ textAlign: 'center' }}>Add New Question</h1>
+                <h2 >Would you Rather...</h2>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="Option One"
+                    className="mb-3"
                 >
-                    Submit Question
-                </button>
-            </div>
-        </div>
+                    <Form.Control type="text" placeholder="What if option 1...." onChange={handleChange} />
+                </FloatingLabel>
+
+                <p>Or</p>
+                <FloatingLabel
+                    controlId="floatingInput"
+                    label="Option Two"
+                    className="mb-3"
+                >
+
+                    <Form.Control type="text" placeholder="What if option 2...." onChange={handleChange2} />
+
+                </FloatingLabel>
+
+                <Button className="btn btn-primary btn-lg" variant="primary" size="lg" onClick={() => {
+                    // validate if form was empty
+                    if (!(option1 === '' || option2 === '')) {
+                        props.dispatch(handleAddQuestion(option1, option2));
+                        //alert("SUCCESS");
+                        setModalShow(true)
+
+                        //console.log('submited');
+                    } else {
+                        alert("Fatal Error #161 - We an encountered an error and could not save your information.");
+                        //console.log('form was empty');
+                    }
+                }}>
+                    Submit
+                </Button>
+
+            </Form>
+
+
+            <MyVerticallyCenteredModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+            />
+
+
+
+        </>
     );
 }
-
+function MyVerticallyCenteredModal(props) {
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+            backdrop="static"
+            keyboard={false}
+        >
+            <Modal.Header >
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Success
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <h4>Congratulations!</h4>
+                <p>
+                    Thank you. Your 'What Would You Rather...' questions have been submitted successfully. Please click the continue button to proceed.
+                </p>
+            </Modal.Body>
+            <Modal.Footer>
+                <Link className="btn btn-primary" onClick={props.onHide} to="/home" >Continue</Link>
+            </Modal.Footer>
+        </Modal>
+    );
+}
 function mapStateToProps({ selectUser }) {
     return {
         userIn: selectUser,

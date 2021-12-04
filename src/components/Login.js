@@ -1,11 +1,14 @@
 /* Login component */
 import React from 'react';
 
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/AuthenticatedUser';
 
-
+import './Login.css'
 
 function Login(props) {
     const classes = ""
@@ -21,50 +24,41 @@ function Login(props) {
         return (<div>loading... line 25 of login.js</div>);
     } else {
         return (
-            
-            <div className={classes.title}>
-                <h1 style={{ marginBottom: '-5px' }}>Please select user to login</h1>
-                <form id="FormControl" className={classes.formControl}>
-                    <label id="InputLabel"
-                        id="demo-simple-select-label"
-                        style={{ color: 'white' }}
-                    >
-                        User
-                    </label>
-                    <select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={user}
-                        onChange={handleChange}
-                        className={classes.select}
-                        color="primary"
-                    >
-                        {Object.keys(props.users).map((u) => {
-                            return (
-                                <option id="MenuItem"
-                                    key={props.users[u].id}
-                                    classes={classes.item}
-                                    value={props.users[u].id}
-                                >
-                                    {props.users[u].name}
-                                </option>
-                            );
-                        })}
-                    </select>
-                </form>
-                <button
-                    onClick={() => {
-                         alert(user)
-                        //console.log('submited');
-                        props.dispatch(setAuthedUser(user));
-                    }}
-                    className={classes.submit}
-                    variant="contained"
-                    color="primary"
-                >
-                    Submit
-                </button>
+
+
+            <div >
+     
+                <Form className="center-screen">
+                    <Form.Group className="mb-4" controlId="formBasicEmail">
+                        <Form.Label>Please Select User:</Form.Label>
+
+                        <Form.Select aria-label="Default select example" onChange={handleChange}>
+                            return(<option value="" selected>Select User</option>)
+                            {Object.keys(props.users).map((u) => {
+                                return (
+                                    <option id="MenuItem"
+                                        key={props.users[u].id}
+                                        value={props.users[u].id}
+                                    >
+                                        {props.users[u].name}
+                                    </option>
+                                );
+                            })}
+                        </Form.Select>
+                    </Form.Group>
+                    <Button variant="primary" type="submit" onClick={() => {
+                            //alert(user)
+                            //console.log('submited');
+                            props.dispatch(setAuthedUser(user));
+                        }}>
+                        Submit
+                    </Button>
+                    
+                </Form>
+   
+
             </div>
+
         );
     }
 }

@@ -5,7 +5,26 @@ import { connect } from 'react-redux';
 
 import { handleAddAnswer } from '../actions/Questions';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
+import UserCard from './Dashboard'
+import Nav from 'react-bootstrap/Nav';
+import Card from 'react-bootstrap/Card';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
+import ProgressBar from 'react-bootstrap/ProgressBar';
+import Col from 'react-bootstrap/Col';
 
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en.json';
+TimeAgo.addDefaultLocale(en);
+
+const formatDate = (timestamp) => {
+  const timeAgo = new TimeAgo('en-US');
+  const date = new Date(timestamp);
+
+  return timeAgo.format(date);
+};
 
 function QuestionPage(props) {
     const classes = ""
@@ -36,7 +55,7 @@ function QuestionPage(props) {
     const option1 = allQuestions[idOfQuestion].optionOne.text;
     const option2 = allQuestions[idOfQuestion].optionTwo.text;
     const timeStamp = allQuestions[idOfQuestion].timestamp;
-    let date = new Date(timeStamp);
+    //let date = new this.formatDate(timeStamp);
     // getting the vote percentage of each options
     const option1Votes = allQuestions[idOfQuestion].optionOne.votes.length;
     const option2Votes = allQuestions[idOfQuestion].optionTwo.votes.length;
@@ -55,118 +74,66 @@ function QuestionPage(props) {
         props.authedUserId
     );
     return (
-        <div id="Card" className={classes.card}>
-            <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
-                {/* code to format the date */}
-                {date.getDate() +
-                    '/' +
-                    (date.getMonth() + 1) +
-                    '/' +
-                    date.getFullYear()}
-            </div>
-            <div id="Avatar"
-                src={avatarOfPersonAsking}
-                className={classes.avatar}
-            ></div>
-            <p>{nameOfPersonAsking} asks:</p>
-            <p style={{ fontSize: '2em' }}>Would you Rather...</p>
-            {/* if the authed user has already voted, show results, if not
-            show options to allow vote */}
-            {userVotedOne || userVotedTwo ? (
-                <React.Fragment>
-                    <div>results:</div>
-                    <div className={classes.resultsOptions}>
-                        <div className={classes.resultOptionText}>
-                            1.- {option1}: {option1VotePercentage}%
-                        </div>
-                        <div
-                            style={{
-                                position: 'absolute',
-                                right: '10px',
-                                top: '15px',
-                            }}
-                        >
-                            votes:
-                            {option1Votes}
-                        </div>
-                        <div
-                            style={{
-                                height: '100%',
-                                backgroundColor: '#c40046',
-                                width: `${option1VotePercentage}%`,
-                                position: 'absolute',
-                                top: '0px',
-                            }}
-                        ></div>
-                    </div>
-                    <div className={classes.resultsOptions}>
-                        <div className={classes.resultOptionText}>
-                            2.- {option2}: {option2VotePercentage}%
-                        </div>
-                        <div
-                            style={{
-                                position: 'absolute',
-                                right: '10px',
-                                top: '15px',
-                            }}
-                        >
-                            votes:
-                            {option2Votes}
-                        </div>
-                        <div
-                            style={{
-                                height: '100%',
-                                backgroundColor: '#c40046',
-                                width: `${option2VotePercentage}%`,
-                                position: 'absolute',
-                                top: '0px',
-                            }}
-                        ></div>
-                    </div>
-                    <div style={{ marginTop: '20px', fontSize: '32px' }}>
-                        You Voted option {userVotedOne ? '1' : '2'}
-                    </div>
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
-                    <button
-                        style={{ width: '80%' }}
-                        variant="contained"
-                        className={
-                            userOpinion === 'optionOne' ? classes.activeBtn : ''
-                        }
-                        onClick={userOpinionToOptionOne}
-                    >
-                        {option1}
-                    </button>
-                    <p>OR</p>
-                    <button
-                        style={{ width: '80%' }}
-                        variant="contained"
-                        className={
-                            userOpinion === 'optionTwo' ? classes.activeBtn : ''
-                        }
-                        onClick={userOpinionToOptionTwo}
-                    >
-                        {option2}
-                    </button>
-                    <button
-                        variant="contained"
-                        color="primary"
-                        className={classes.btn}
-                        style={{ marginTop: '20px' }}
-                        onClick={() => {
-                            console.log('submited');
+        <>
+
+            <Col>
+                <Card style={{ textAlign: "center" }} >
+                                        <Card.Header style={{ textAlign: "right" }}>      <small className="text-muted">
+                        {formatDate(timeStamp)}</small></Card.Header>
+                        <Image style={{ width: "200px", margin: "0 auto", padding: "10px" }} variant="top" src={avatarOfPersonAsking} roundedCircle />
+                    
+                    <Card.Body>
+                    <h3>{nameOfPersonAsking}</h3>
+                        <Card.Title>Would you Rather...</Card.Title>
+                        <Card.Text>
+                            
+                            {userVotedOne || userVotedTwo ? (
+                                <>
+                                    <div style={{textAlign: "left", fontWeight: "bold"}}>Results:</div>
+
+
+                                    <p style={{textAlign: "left", margin:"0px"}}>{option1} {userVotedOne ? `⭐ Your vote`: ""}</p>
+                                    <ProgressBar style={{ fontSize: "18px", height:"20px"}} variant="primary" now={option1VotePercentage} label={`${option1VotePercentage}%`} />
+                                    {option1Votes > 1 ? `${option1Votes} votes`: `${option1Votes} vote`}
+                                    
+
+                                    <p style={{textAlign: "left", margin:"0px"}}>{option2}{userVotedOne ? "": `⭐ Your vote`}</p>
+                                    <ProgressBar style={{ fontSize: "18px", height:"20px"}} variant="info" now={option2VotePercentage} label={`${option2VotePercentage}%`} />
+                                    {option2Votes > 1 ? `${option2Votes} votes`: `${option2Votes} vote`}
+                                    {userVotedOne ? "": " - Your Vote"}
+
+
+                                    {/* <div style={{ marginTop: '20px', fontSize: '32px' }}>You Voted for:  "{userVotedOne ? option1 : option2}"</div> */}
+                                </>
+                            ) : (
+                                <>
+                                    <div style={{margin: "auto 0"}}>
+                                <p><input type="radio" value="1" onClick={userOpinionToOptionOne}/> {option1} </p>   
+                                
+                                    
+                                    <p>Or</p>
+                                    <p><input type="radio" value="2" onClick={userOpinionToOptionTwo}/> {option2} </p> 
+                                    </div>
+                         
+                                    
+                                    <Button className="logoutButton NavLink btn btn-primary" onClick={() => {
+                            
                             props.dispatch(
                                 handleAddAnswer(userOpinion, idOfQuestion)
                             );
-                        }}
-                    >
-                        Submit Opinion
-                    </button>
-                </React.Fragment>
-            )}
-        </div>
+                        }}>Submit Your Answer</Button>
+                                </>
+                            )}
+
+
+                        </Card.Text>
+                    </Card.Body>
+  
+                </Card>
+            </Col>
+
+
+        </>
     );
 }
 
