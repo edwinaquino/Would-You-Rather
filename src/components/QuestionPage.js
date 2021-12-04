@@ -30,12 +30,16 @@ function QuestionPage(props) {
     const classes = ""
     // React.UseState to save user selection
     const [userOpinion, setUserOpinion] = React.useState('');
+    const [buttonDisabled, setButtonDisabled] = React.useState('disabled');
     // fnctions to change the state
     const userOpinionToOptionOne = () => {
         setUserOpinion('optionOne');
+        setButtonDisabled('');
+
     };
     const userOpinionToOptionTwo = () => {
         setUserOpinion('optionTwo');
+        setButtonDisabled('');
     };
 
     console.log(userOpinion);
@@ -108,15 +112,15 @@ function QuestionPage(props) {
                             ) : (
                                 <>
                                     <div style={{margin: "auto 0"}}>
-                                <p><input type="radio" value="1" onClick={userOpinionToOptionOne}/> {option1} </p>   
+                                <p><input name="question" type="radio" value="1" onClick={userOpinionToOptionOne}/> {option1} </p>   
                                 
                                     
                                     <p>Or</p>
-                                    <p><input type="radio" value="2" onClick={userOpinionToOptionTwo}/> {option2} </p> 
+                                    <p><input name="question" type="radio" value="2" onClick={userOpinionToOptionTwo}/> {option2} </p> 
                                     </div>
                          
                                     
-                                    <Button className="logoutButton NavLink btn btn-primary" onClick={() => {
+                                    <Button className="logoutButton NavLink btn btn-primary" disabled={buttonDisabled} onClick={() => {
                             
                             props.dispatch(
                                 handleAddAnswer(userOpinion, idOfQuestion)

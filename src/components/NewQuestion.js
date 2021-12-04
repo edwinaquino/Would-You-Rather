@@ -20,9 +20,12 @@ function NewQuestion(props) {
     // react.UseState to save the user input text for both options
     const [option1, setUser] = React.useState('');
     const [option2, setUser2] = React.useState('');
+    
+
     // functions to interact with the state
     const handleChange = (event) => {
         setUser(event.target.value);
+        
     };
     const handleChange2 = (event) => {
         setUser2(event.target.value);
@@ -54,16 +57,16 @@ function NewQuestion(props) {
 
                 </FloatingLabel>
 
-                <Button className="btn btn-primary btn-lg" variant="primary" size="lg" onClick={() => {
+                <Button disabled={option1!=='' && option2!=='' ? "" : "disabled"} className="btn btn-primary btn-lg" variant="primary" size="lg" onClick={() => {
                     // validate if form was empty
-                    if (!(option1 === '' || option2 === '')) {
+                    if (!(option1 === '' && option2 === '')) {
                         props.dispatch(handleAddQuestion(option1, option2));
                         //alert("SUCCESS");
                         setModalShow(true)
 
                         //console.log('submited');
                     } else {
-                        alert("Fatal Error #161 - We an encountered an error and could not save your information.");
+                        alert("Fatal Error #161 - We an encountered an error and could not save your information. Please make sure all fields are populated.");
                         //console.log('form was empty');
                     }
                 }}>

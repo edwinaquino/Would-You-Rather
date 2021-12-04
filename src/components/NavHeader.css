@@ -41,6 +41,9 @@ code {
     text-decoration: none;
 
 }
+.NavLink:hover{
+  color: #FFF;
+}
 .NaveItemText{
   color: #FFF;
   margin-top: 5px;

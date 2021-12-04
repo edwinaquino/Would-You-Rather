@@ -26,7 +26,7 @@ class App extends Component {
   }
   render() {
     console.clear();
-    console.log('LINE 25 App.js User is logged in?', this.props);
+   // console.log('LINE 25 App.js User is logged in?', this.props);
 
     return (
 

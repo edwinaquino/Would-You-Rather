@@ -27,11 +27,34 @@ const formatDate = (timestamp) => {
   return timeAgo.format(date);
 };
 
+
+// Does the home page have the desired functionality?
+
+// The answered and unanswered polls are both available at the root.
+// The user can alternate between viewing answered and unanswered polls.
+// The unanswered questions are shown by default.
+// The name of the logged in user is visible on the page.
+// The user can navigate to the leaderboard.
+// The user can navigate to the form that allows the user to create a new poll.
+
+// Each polling question resides in the correct category. For example, if a question hasn’t been answered by the current user, it should be in the “Unanswered” category.
+// A polling question links to details of that poll.
+// The polls in both categories are arranged from the most recently created (top) to the least recently created (bottom).
+
+
+
+
+
+
+
+
+
+
 // function that recives classes name avatarImg id and timestamp
 // and returns the html for a "Card"
 function UserCard(classes, name, avatarImg, id, timestamp, optionOne = "", optionTwo = "", mode) {
     //alert(mode);
-    console.log("Dashboard.js LINE 22", optionOne);
+    //console.log("Dashboard.js LINE 22", optionOne);
     let url = '/question/:id' + id;
 
   
@@ -54,7 +77,7 @@ function UserCard(classes, name, avatarImg, id, timestamp, optionOne = "", optio
                             <p>{optionOne.text}</p>
                             <p>or</p>
                             <p>{optionTwo.text}?</p>
-                            <Link to={url} className="logoutButton NavLink btn btn-primary">{mode==="answered" ? "View Results " : "Give Answer"}</Link>
+                            <Link to={url} className="logoutButton NavLink btn btn-primary">{mode==="answered" ? "View Results " : "View Poll"}</Link>
                         </Card.Text>
                     </Card.Body>
 

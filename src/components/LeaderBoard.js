@@ -44,8 +44,8 @@ function UserCard(
 
 
             <tr>
-                <td><Image src={avatarImg} roundedCircle className="hdrAvatarImg" /></td>
-                <td> <h2> <Badge style={{ borderRadius: "30px" }} bg="primary">5</Badge></h2></td>
+                <td><Image src={avatarImg} roundedCircle className="hdrAvatarImg" /><p>{name}</p></td>
+                <td> <h2> <Badge style={{ borderRadius: "30px" }} bg="primary">{answeredQ + askedQ}</Badge></h2></td>
 
                 <td><h2> <Badge style={{ borderRadius: "30px" }} bg="info">{answeredQ}</Badge> </h2></td>
                 <td><h2> <Badge style={{ borderRadius: "30px" }} bg="warning">{askedQ}</Badge> </h2></td>
@@ -80,7 +80,7 @@ function LeaderBoard(props) {
                         <th>Total Score</th>
 
                         <th>Answered Questions </th>
-                        <th>Created Questions</th>
+                        <th>Asked Questions</th>
                     </tr>
                 </thead>
                 <tbody>

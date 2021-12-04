@@ -24,19 +24,19 @@ export class NotFound extends Component {
                         marginBottom: '0px',
                     }}
                 >
-                    404
+                    Oops!
                 </h1>
+                
                 <h6 style={{ fontSize: '20px', marginTop: '10px' }}>
-                    Page not found
+                    404 - Page was not found.
                 </h6>
-                <button
-                    component={Link}
+                <Link className="btn btn-danger btn-lg"
+  
                     to="/home"
-                    variant="contained"
-                    color="secondary"
+
                 >
-                    Go Home
-                </button>
+                    View Home Page
+                </Link>
             </div>
         );
     }

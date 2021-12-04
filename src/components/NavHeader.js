@@ -34,7 +34,7 @@ function NavHeader(props) {
     <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="me-auto">
     <Nav.Item><Link to="/home" className="NavLink">Dashboard</Link></Nav.Item>
-    <Nav.Item><Link to="/add" className="NavLink">Create Question</Link></Nav.Item>
+    <Nav.Item><Link to="/add" className="NavLink">Create New Poll</Link></Nav.Item>
     <Nav.Item><Link to="/LeaderBoard" className="NavLink">LeaderBoard</Link></Nav.Item>
 
 
