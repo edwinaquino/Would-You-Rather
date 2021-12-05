@@ -5,7 +5,6 @@ import authedUser from './AuthenticatedUser';
 import users from './Users';
 import questions from './Questions'; // Poll Question
 import { loadingBarReducer } from 'react-redux-loading';
-
 export default combineReducers({
     authedUser,
     users,

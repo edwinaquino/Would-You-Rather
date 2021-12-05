@@ -7,7 +7,6 @@ export const ADD_ANSWER = 'ADD_ANSWER';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const SET_UNANSWERED_QUESTIONS = 'SET_UNANSWERED_QUESTIONS';
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
-
 // Answers Functions
 function addAnswerToQuestions(questions) {
     return {
@@ -15,7 +14,6 @@ function addAnswerToQuestions(questions) {
         questions,
     };
 }
-
 export function handleAddAnswer(answer, qId) {
     return (dispatch, getState) => {
         const { authedUser } = getState();
@@ -29,7 +27,6 @@ export function handleAddAnswer(answer, qId) {
         });
     };
 }
-
 // Questions Functions
 export function handleAddQuestion(optionOne, optionTwo) {
     return (dispatch, getState) => {

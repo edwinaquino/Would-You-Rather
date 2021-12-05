@@ -12,5 +12,4 @@ class Logout extends Component {
         return <Redirect to="/" />;
     }
 }
-
 export default connect(null)(Logout);

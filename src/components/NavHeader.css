@@ -9,38 +9,32 @@ body {
 body > .container {
   padding: 60px 15px 0;
 }
-
 .footer > .container {
   padding-right: 15px;
   padding-left: 15px;
 }
-
 code {
   font-size: 80%;
 }
-
-.NavLink{
-    color: #FFF;
-    padding-left: 15px;
-    text-decoration: none;
-
+.NavLink {
+  color: #fff;
+  padding-left: 15px;
+  text-decoration: none;
 }
-.NavLink:hover{
-  color: #FFF;
+.NavLink:hover {
+  color: #fff;
 }
-.NaveItemText{
-  color: #FFF;
+.NaveItemText {
+  color: #fff;
   margin-top: 5px;
   margin-right: 10px;
-
 }
-.logoutButton{
-  color: #FFF;
+.logoutButton {
+  color: #fff;
   margin-top: 10px;
   margin-right: 10px;
   margin-left: 20px;
-
 }
-.hdravatarURL{
+.hdravatarURL {
   width: 50px;
 }

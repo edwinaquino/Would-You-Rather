@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { getInitialData } from '../actions';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 // Import Components for App
 import Dashboard from './Dashboard';
 import AddQuestion from './AddQuestion';
@@ -13,12 +12,10 @@ import Login from './Login';
 import LogOut from './Logout';
 import { NotFound } from './NotFound';
 import NavHeader from './NavHeader';
-
 // Import Style
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
 // Start Main Class
 class App extends Component {
   state = {};
@@ -30,17 +27,13 @@ class App extends Component {
   render() {
     // For Debuging
     console.clear();
-   // console.log('LINE 25 App.js User is logged in?', this.props);
-
+    // console.log('LINE 25 App.js User is logged in?', this.props);
     return (
-
       <div>
-
         {this.props.userIn === true ? (
           <Route path="/" component={Login}></Route>
         ) : (
           <>
-
             <Route
               path={[
                 '/home',
@@ -50,7 +43,6 @@ class App extends Component {
               ]}
               component={NavHeader}
             />
-
             <Container>
               <Row>
                 <Col>
@@ -75,7 +67,6 @@ class App extends Component {
                       path="/leaderboard"
                       component={LeaderBoard}
                     ></Route>
-
                     <Route
                       exact
                       path="/logout"
@@ -85,7 +76,6 @@ class App extends Component {
                     <Redirect exact from="/" to="/home" />
                     <Route component={NotFound} />
                   </Switch>
-
                 </Col>
               </Row>
             </Container>
@@ -95,11 +85,9 @@ class App extends Component {
     );
   }
 }
-
 function mapStateToProps({ authedUser }) {
   return {
     userIn: authedUser === null,
   };
 }
-
 export default connect(mapStateToProps)(App);

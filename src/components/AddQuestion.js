@@ -1,32 +1,26 @@
 /* Add New Would you Rather... Question */
 import React from 'react';
-
 import { connect } from 'react-redux';
 import { handleAddQuestion } from '../actions/Questions';
 import { Link } from 'react-router-dom';
-
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
 function AddQuestion(props) {
-
     const [modalShow, setModalShow] = React.useState(false);
     const [optionOne, setUser] = React.useState('');
     const [optionTwo, setUser2] = React.useState('');
     // update state and assigned values when user has provided
     const GetQuestion1 = (event) => {
         setUser(event.target.value);
-        
     };
     const GetQuestion2 = (event) => {
         setUser2(event.target.value);
     };
-    // DEBUGING
+    // DEBUGGING
     //console.log(optionOne);
     //console.log(optionTwo);
-
     return (
         <>
             <Form>
@@ -39,25 +33,20 @@ function AddQuestion(props) {
                 >
                     <Form.Control type="text" placeholder="What if option 1...." onChange={GetQuestion1} />
                 </FloatingLabel>
-
                 <p>Or</p>
                 <FloatingLabel
                     controlId="floatingInput"
                     label="Option Two"
                     className="mb-3"
                 >
-
                     <Form.Control type="text" placeholder="What if option 2...." onChange={GetQuestion2} />
-
                 </FloatingLabel>
+                <Button disabled={optionOne !== '' && optionTwo !== '' ? "" : "disabled"} className="btn btn-primary btn-lg" variant="primary" size="lg" onClick={() => {
 
-                <Button disabled={optionOne!=='' && optionTwo!=='' ? "" : "disabled"} className="btn btn-primary btn-lg" variant="primary" size="lg" onClick={() => {
-                    
                     if (!(optionOne === '' && optionTwo === '')) {
                         props.dispatch(handleAddQuestion(optionOne, optionTwo));
                         //alert("SUCCESS");
                         setModalShow(true)
-
                         //console.log('submited');
                     } else {
                         alert("Fatal Error #161 - We an encountered an error and could not save your information. Please make sure all fields are populated.");
@@ -66,17 +55,11 @@ function AddQuestion(props) {
                 }}>
                     Submit
                 </Button>
-
             </Form>
-
-
             <MyVerticallyCenteredModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
             />
-
-
-
         </>
     );
 }
@@ -113,5 +96,4 @@ function mapStateToProps({ selectUser }) {
         userIn: selectUser,
     };
 }
-
 export default connect(mapStateToProps)(AddQuestion);

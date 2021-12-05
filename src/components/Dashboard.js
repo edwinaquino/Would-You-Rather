@@ -8,49 +8,35 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
-
 // Instead of date: mm/dd/yyyy
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en.json';
 TimeAgo.addDefaultLocale(en);
-
 const formatDate = (timestamp) => {
     const timeAgo = new TimeAgo('en-US');
     const date = new Date(timestamp);
-
     return timeAgo.format(date);
 };
-
 // rubrics REQUIREMENTS
 // Does the home page have the desired functionality?
-
 // The answered and unanswered polls are both available at the root.
 // The user can alternate between viewing answered and unanswered polls.
 // The unanswered questions are shown by default.
 // The name of the logged in user is visible on the page.
 // The user can navigate to the leaderboard.
 // The user can navigate to the form that allows the user to create a new poll.
-
 // Each polling question resides in the correct category. For example, if a question hasn’t been answered by the current user, it should be in the “Unanswered” category.
 // A polling question links to details of that poll.
 // The polls in both categories are arranged from the most recently created (top) to the least recently created (bottom).
-
-
-
-function UserDetails(classes, name, avatarImg, id, timestamp, optionOne = "", optionTwo = "", mode) {
+function UserDetails(classes, name, avatarImg, id, timestamp, optionOne = "", optionTwo = "", mode, index) {
     // Debuging
     //alert(mode);
     //console.log("Dashboard.js LINE 22", optionOne);
     let url = '/question/:id' + id;
-
-
-
     return (
         <>
-
-
-            <Col>
-                <Card key={id} style={{ textAlign: "center" }} >
+            <Col key={index}>
+                <Card style={{ textAlign: "center" }} >
                     <Card.Header style={{ textAlign: "right" }}>      <small className="text-muted">
                         {formatDate(timestamp)}</small></Card.Header>
                     <Image style={{ width: "200px", margin: "0 auto", padding: "10px" }} variant="top" src={avatarImg} roundedCircle />
@@ -58,25 +44,17 @@ function UserDetails(classes, name, avatarImg, id, timestamp, optionOne = "", op
                         <h3>{name}</h3>
                         <Card.Title style={{ fontStyle: "italic" }}>Would you Rather...</Card.Title>
                         <Card.Text>
-
-
                             <p>{optionOne.text}</p>
                             <p>or</p>
                             <p>{optionTwo.text}?</p>
                             <Link to={url} className="logoutButton NavLink btn btn-primary">{mode === "answered" ? "View Results " : "View Poll"}</Link>
                         </Card.Text>
                     </Card.Body>
-
                 </Card>
             </Col>
-
-
-
-
         </>
     );
 }
-
 function Dashboard(props) {
     // used react.useState to toggle between answered and Unanswered questions
     const [mode, setMode] = React.useState('Unanswered');
@@ -87,30 +65,23 @@ function Dashboard(props) {
     const changeToAnswered = () => {
         setMode('answered');
     };
-
     //console.log(mode);
     // getting data from the store
     const answeredQuestionsIds = props.answeredQuestions;
     const allQuestions = props.questions;
     const allUsers = props.users;
-
     //console.log(allUsers);
-   // console.log(answeredQuestionsIds);
+    // console.log(answeredQuestionsIds);
     //console.log(allQuestions);
-
     const orderedQuestionsIds = Object.keys(allQuestions).sort(
         (firstElement, secondElement) =>
             allQuestions[secondElement].timestamp -
             allQuestions[firstElement].timestamp
     );
-
     const classes = ""
     return (
-
         <>
-
             <h1 style={{ textAlign: 'center' }}>Dashboard - <span style={{ textTransform: "capitalize" }}>{mode}</span></h1>
-
             <Nav variant="pills" defaultActiveKey="link-1" style={{ marginBottom: "15px" }}>
                 <Nav.Item>
                     <Nav.Link eventKey={mode === 'Unanswered' ? 'link-1' : 'disabled'} onClick={changeToUnanswered}>Unanswered</Nav.Link>
@@ -118,20 +89,12 @@ function Dashboard(props) {
                 <Nav.Item>
                     <Nav.Link eventKey={mode === 'Answered' ? 'disabled' : 'link-2'} onClick={changeToAnswered}>Answered</Nav.Link>
                 </Nav.Item>
-
             </Nav>
-
-
-
             <Row xs={1} md={2} className="g-4">
-
-
-
                 {orderedQuestionsIds.map(function (key, index) {
                     // {console.log("Dashboard.js Line 101. ", allQuestions[key])}
-
                     if (mode === 'Unanswered') {
-                        // show unanswered questions
+
                         if (
                             !answeredQuestionsIds.some((e) =>
                                 allQuestions[key].id.includes(e)
@@ -146,11 +109,11 @@ function Dashboard(props) {
                                 allQuestions[key].timestamp,
                                 allQuestions[key].optionOne,
                                 allQuestions[key].optionTwo,
-                                mode
+                                mode,
+                                index
                             );
                         }
                     } else {
-                        // show answered questions
                         if (
                             answeredQuestionsIds.some((e) =>
                                 allQuestions[key].id.includes(e)
@@ -165,23 +128,14 @@ function Dashboard(props) {
                                 allQuestions[key].timestamp,
                                 allQuestions[key].optionOne,
                                 allQuestions[key].optionTwo,
-                                mode
+                                mode,
+                                index
                             );
                         }
                     }
+                    return false;
                 })}
-
-
-
-
-
-
             </Row>
-
-
-
-
-
         </>
     );
 }
@@ -191,12 +145,10 @@ function mapStateToProps({ questions, users, authedUser }) {
     Object.keys(authedUser).length !== 0 && Object.keys(users).length !== 0
         ? (answeredQuestions = Object.keys(users[authedUser.id]['answers']))
         : (answeredQuestions = {});
-
     return {
         answeredQuestions,
         questions,
         users,
     };
 }
-
 export default connect(mapStateToProps)(Dashboard);
