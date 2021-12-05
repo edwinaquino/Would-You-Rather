@@ -6,22 +6,24 @@ In this app, users will be able to answer questions, see which questions they ha
 
 
 ## Screen Shot
-![my-reads-app](https://user-images.githubusercontent.com/30946443/143803774-f9cb660e-3811-487e-b383-96bcb6770571.jpg)
+![Would You Rather App](https://user-images.githubusercontent.com/30946443/144736205-34b77d55-4701-4e9f-8c47-18ca4efeba8d.gif)
 
 ## Getting Started
 
 To get started developing right away:
 
-* Clone this project using Git: `https://github.com/edwinaquino/Would-You-Rather-Project.git`
-* cd into my-reads folder: `cd Would-You-Rather-Project`
+* Clone this project using Git: `git clone https://github.com/edwinaquino/Would-You-Rather.git`
+* cd into my-reads folder: `cd Would-You-Rather`
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 * Open In Browser - Your app should now be running on port 3000. Open your browser to: http://localhost:3000
 
-## Requirements
-* React V16.6.3
-* React Router: 4.2.2
-* React Scripts: 2.1.1
+## Included Dependencies
+
+* bootstrap: 5.1.3,
+* javascript-time-ago: ^2.3.10
+* react-bootstrap: ^2.0.3
+* react-redux": ^7.2.6
 
 ## API Data
 
