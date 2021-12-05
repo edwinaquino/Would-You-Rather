@@ -28,7 +28,7 @@ function UserDetails(
 
 
             <tr>
-                <td><Image src={avatarImg} roundedCircle className="hdrAvatarImg" /><p>{name}</p></td>
+                <td><Image src={avatarImg} roundedCircle className="hdravatarURL" /><p>{name}</p></td>
                 <td> <h2> <Badge style={{ borderRadius: "30px" }} bg="primary">{answeredQ + askedQ}</Badge></h2></td>
 
                 <td><h2> <Badge style={{ borderRadius: "30px" }} bg="info">{answeredQ}</Badge> </h2></td>
