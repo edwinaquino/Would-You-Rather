@@ -47,18 +47,18 @@ function Question(props) {
     const nameOfPersonAsking = allUsers[allQuestions[idOfQuestion].author].name;
     const avatarOfPersonAsking =
         allUsers[allQuestions[idOfQuestion].author].avatarURL;
-    const questionOne = allQuestions[idOfQuestion].optionOne.text;
-    const questionTwo = allQuestions[idOfQuestion].optionTwo.text;
+    const option1 = allQuestions[idOfQuestion].optionOne.text;
+    const option2 = allQuestions[idOfQuestion].optionTwo.text;
     const timeStamp = allQuestions[idOfQuestion].timestamp;
 
-    const questionOneVotes = allQuestions[idOfQuestion].optionOne.votes.length;
-    const questionTwoVotes = allQuestions[idOfQuestion].optionTwo.votes.length;
-    const totalVotePercentage = questionOneVotes + questionTwoVotes;
-    const questionOneVotePercentage = Math.trunc(
-        (questionOneVotes * 100) / totalVotePercentage
+    const option1Votes = allQuestions[idOfQuestion].optionOne.votes.length;
+    const option2Votes = allQuestions[idOfQuestion].optionTwo.votes.length;
+    const totalVotePercentage = option1Votes + option2Votes;
+    const option1VotePercentage = Math.trunc(
+        (option1Votes * 100) / totalVotePercentage
     );
-    const questionTwoVotePercentage = Math.trunc(
-        (questionTwoVotes * 100) / totalVotePercentage
+    const option2VotePercentage = Math.trunc(
+        (option2Votes * 100) / totalVotePercentage
     );
 
     const userVotedOne = allQuestions[idOfQuestion].optionOne.votes.includes(
@@ -85,27 +85,27 @@ function Question(props) {
                                     <div style={{textAlign: "left", fontWeight: "bold"}}>Results:</div>
 
 
-                                    <p style={{textAlign: "left", margin:"0px"}}>{questionOne} {userVotedOne ? `⭐ Your vote`: ""}</p>
-                                    <ProgressBar style={{ fontSize: "18px", height:"20px"}} variant="primary" now={questionOneVotePercentage} label={`${questionOneVotePercentage}%`} />
-                                    {questionOneVotes > 1 ? `${questionOneVotes} votes`: `${questionOneVotes} vote`}
+                                    <p style={{textAlign: "left", margin:"0px"}}>{option1} {userVotedOne ? `⭐ Your vote`: ""}</p>
+                                    <ProgressBar style={{ fontSize: "18px", height:"20px"}} variant="primary" now={option1VotePercentage} label={`${option1VotePercentage}%`} />
+                                    {option1Votes > 1 ? `${option1Votes} votes`: `${option1Votes} vote`}
                                     
 
-                                    <p style={{textAlign: "left", margin:"0px"}}>{questionTwo}{userVotedOne ? "": `⭐ Your vote`}</p>
-                                    <ProgressBar style={{ fontSize: "18px", height:"20px"}} variant="info" now={questionTwoVotePercentage} label={`${questionTwoVotePercentage}%`} />
-                                    {questionTwoVotes > 1 ? `${questionTwoVotes} votes`: `${questionTwoVotes} vote`}
+                                    <p style={{textAlign: "left", margin:"0px"}}>{option2}{userVotedOne ? "": `⭐ Your vote`}</p>
+                                    <ProgressBar style={{ fontSize: "18px", height:"20px"}} variant="info" now={option2VotePercentage} label={`${option2VotePercentage}%`} />
+                                    {option2Votes > 1 ? `${option2Votes} votes`: `${option2Votes} vote`}
                                     {userVotedOne ? "": " - Your Vote"}
 
 
-                                    {/* <div style={{ marginTop: '20px', fontSize: '32px' }}>You Voted for:  "{userVotedOne ? questionOne : questionTwo}"</div> */}
+                                    {/* <div style={{ marginTop: '20px', fontSize: '32px' }}>You Voted for:  "{userVotedOne ? option1 : option2}"</div> */}
                                 </>
                             ) : (
                                 <>
                                     <div style={{margin: "auto 0"}}>
-                                <p><input name="question" type="radio" value="1" onClick={userOpinionToOptionOne}/> {questionOne} </p>   
+                                <p><input name="question" type="radio" value="1" onClick={userOpinionToOptionOne}/> {option1} </p>   
                                 
                                     
                                     <p>Or</p>
-                                    <p><input name="question" type="radio" value="2" onClick={userOpinionToOptionTwo}/> {questionTwo} </p> 
+                                    <p><input name="question" type="radio" value="2" onClick={userOpinionToOptionTwo}/> {option2} </p> 
                                     </div>
                          
                                     
