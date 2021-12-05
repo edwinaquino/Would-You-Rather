@@ -33,7 +33,7 @@ function QuestionPage(props) {
         setButtonDisabled('');
     };
 
-    console.log(userOpinion);
+    //console.log(userOpinion);
     // getting all necesary data
     const allUsers = props.users;
     const allQuestions = props.questions;

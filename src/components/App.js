@@ -24,12 +24,12 @@ class App extends Component {
   state = {};
   // Check App Component Mounts properly before dispatching
   componentDidMount() {
-    console.log('componentDidMount()');
+    //console.log('componentDidMount()');
     this.props.dispatch(getInitialData());
   }
   render() {
     // For Debuging
-    //console.clear();
+    console.clear();
    // console.log('LINE 25 App.js User is logged in?', this.props);
 
     return (

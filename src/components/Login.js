@@ -30,7 +30,7 @@ function Login(props) {
         setUser(event.target.value);
     };
     // FOr Debuggin
-    console.log("LINE33 Login.js: ",props.users);
+    //console.log("LINE33 Login.js: ",props.users);
     //alert(props.users)
 
         return (

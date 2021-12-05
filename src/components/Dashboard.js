@@ -88,16 +88,16 @@ function Dashboard(props) {
         setMode('answered');
     };
 
-    console.log(mode);
+    //console.log(mode);
     // getting data from the store
     const answeredQuestionsIds = props.answeredQuestions;
     const allQuestions = props.questions;
     const allUsers = props.users;
 
-    console.log(allUsers);
-    console.log(answeredQuestionsIds);
-    console.log(allQuestions);
-    // function to order the questions by timestamp
+    //console.log(allUsers);
+   // console.log(answeredQuestionsIds);
+    //console.log(allQuestions);
+
     const orderedQuestionsIds = Object.keys(allQuestions).sort(
         (firstElement, secondElement) =>
             allQuestions[secondElement].timestamp -
