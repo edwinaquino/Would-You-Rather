@@ -1,28 +1,21 @@
 import React from 'react';
-
 import { Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
 
-
+// Style
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import  './NavHeader.css'
 
-// nav bar
 function NavHeader(props) {
-    let avatarImg = props.users[props.authedUserId].avatarURL;
-    const classes = ""
-    const [value, setValue] = React.useState(0);
+    // Format avatar url
+    let avatarURL = props.users[props.authedUserId].avatarURL;
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
 
     return (
-<div>
+<>
 
 
 
@@ -42,7 +35,7 @@ function NavHeader(props) {
     <Nav>
     <Nav.Item className="NaveItemText">{props.users[props.authedUserId].name}</Nav.Item>
     
-    <Nav.Item ><Image src={avatarImg} roundedCircle className="hdrAvatarImg"/></Nav.Item>
+    <Nav.Item ><Image src={avatarURL} roundedCircle className="hdravatarURL"/></Nav.Item>
     <Nav.Item className=" "><Link to="/logout" className="logoutButton NavLink btn btn-warning btn-sm">Log out</Link></Nav.Item>
     </Nav>
     </Navbar.Collapse>
@@ -52,7 +45,7 @@ function NavHeader(props) {
 
 
 
-</div>
+</>
 
     );
 }

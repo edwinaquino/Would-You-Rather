@@ -1,28 +1,22 @@
-/* new question component */
+/* Add New Would you Rather... Question */
 import React from 'react';
-
-
 
 import { connect } from 'react-redux';
 import { handleAddQuestion } from '../actions/Questions';
 import { Link } from 'react-router-dom';
-
 
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+function AddQuestion(props) {
 
-function NewQuestion(props) {
-    
-    // manager Components State
     const [modalShow, setModalShow] = React.useState(false);
     const classes = ""
     const [option1, setUser] = React.useState('');
     const [option2, setUser2] = React.useState('');
-    
-    // Get user poll question text from form fields
+    // update state and assigned values when user has provided
     const GetQuestion1 = (event) => {
         setUser(event.target.value);
         
@@ -59,7 +53,7 @@ function NewQuestion(props) {
                 </FloatingLabel>
 
                 <Button disabled={option1!=='' && option2!=='' ? "" : "disabled"} className="btn btn-primary btn-lg" variant="primary" size="lg" onClick={() => {
-                    // validate if form was empty
+                    
                     if (!(option1 === '' && option2 === '')) {
                         props.dispatch(handleAddQuestion(option1, option2));
                         //alert("SUCCESS");
@@ -121,4 +115,4 @@ function mapStateToProps({ selectUser }) {
     };
 }
 
-export default connect(mapStateToProps)(NewQuestion);
+export default connect(mapStateToProps)(AddQuestion);

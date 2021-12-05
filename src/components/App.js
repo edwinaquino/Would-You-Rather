@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 
 // Import Components
 import Dashboard from './Dashboard';
-import NewQuestion from './NewQuestion';
-import QuestionPage from './QuestionPage';
+import AddQuestion from './AddQuestion';
+import Question from './Question';
 import LeaderBoard from './LeaderBoard';
 import Login from './Login';
 import LogOut from './Logout';
@@ -62,12 +62,12 @@ class App extends Component {
                     <Route
                       exact
                       path="/add"
-                      component={NewQuestion}
+                      component={AddQuestion}
                     ></Route>
                     <Route
                       exact
                       path="/question/:id"
-                      component={QuestionPage}
+                      component={Question}
                     ></Route>
                     <Route
                       exact
