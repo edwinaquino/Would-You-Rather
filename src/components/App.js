@@ -1,9 +1,10 @@
+// Would you Rather... App
 import React, { Component } from 'react';
 import { getInitialData } from '../actions';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-// Import Components
+// Import Components for App
 import Dashboard from './Dashboard';
 import AddQuestion from './AddQuestion';
 import Question from './Question';

@@ -13,9 +13,8 @@ import Modal from 'react-bootstrap/Modal';
 function AddQuestion(props) {
 
     const [modalShow, setModalShow] = React.useState(false);
-    const classes = ""
-    const [option1, setUser] = React.useState('');
-    const [option2, setUser2] = React.useState('');
+    const [optionOne, setUser] = React.useState('');
+    const [optionTwo, setUser2] = React.useState('');
     // update state and assigned values when user has provided
     const GetQuestion1 = (event) => {
         setUser(event.target.value);
@@ -24,9 +23,9 @@ function AddQuestion(props) {
     const GetQuestion2 = (event) => {
         setUser2(event.target.value);
     };
-
-    console.log(option1);
-    console.log(option2);
+    // DEBUGING
+    //console.log(optionOne);
+    //console.log(optionTwo);
 
     return (
         <>
@@ -52,10 +51,10 @@ function AddQuestion(props) {
 
                 </FloatingLabel>
 
-                <Button disabled={option1!=='' && option2!=='' ? "" : "disabled"} className="btn btn-primary btn-lg" variant="primary" size="lg" onClick={() => {
+                <Button disabled={optionOne!=='' && optionTwo!=='' ? "" : "disabled"} className="btn btn-primary btn-lg" variant="primary" size="lg" onClick={() => {
                     
-                    if (!(option1 === '' && option2 === '')) {
-                        props.dispatch(handleAddQuestion(option1, option2));
+                    if (!(optionOne === '' && optionTwo === '')) {
+                        props.dispatch(handleAddQuestion(optionOne, optionTwo));
                         //alert("SUCCESS");
                         setModalShow(true)
 

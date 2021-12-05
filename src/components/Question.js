@@ -17,7 +17,7 @@ import Col from 'react-bootstrap/Col';
 
 
 
-function Question(props) {
+function QuestionPage(props) {
     const classes = ""
     // React.UseState to save user selection
     const [userOpinion, setUserOpinion] = React.useState('');
@@ -138,4 +138,4 @@ function mapStateToProps({ authedUser, users, questions }) {
     };
 }
 
-export default connect(mapStateToProps)(Question);
+export default connect(mapStateToProps)(QuestionPage);
