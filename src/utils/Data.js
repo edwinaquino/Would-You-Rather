@@ -1,4 +1,4 @@
-/* FAKE DATA */
+// Data provided by Udacity started code: https://github.com/udacity/reactnd-project-would-you-rather-starter
 
 let users: IUser = {
     david: {
@@ -253,4 +253,3 @@ let users: IUser = {
   };
 
   export { users, questions };
-  

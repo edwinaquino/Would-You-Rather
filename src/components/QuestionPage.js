@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { handleAddAnswer } from '../actions/Questions';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import UserCard from './Dashboard'
+import UserDetails from './Dashboard'
 import Nav from 'react-bootstrap/Nav';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
@@ -15,16 +15,7 @@ import Image from 'react-bootstrap/Image';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Col from 'react-bootstrap/Col';
 
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en.json';
-TimeAgo.addDefaultLocale(en);
 
-const formatDate = (timestamp) => {
-  const timeAgo = new TimeAgo('en-US');
-  const date = new Date(timestamp);
-
-  return timeAgo.format(date);
-};
 
 function QuestionPage(props) {
     const classes = ""
@@ -59,8 +50,7 @@ function QuestionPage(props) {
     const option1 = allQuestions[idOfQuestion].optionOne.text;
     const option2 = allQuestions[idOfQuestion].optionTwo.text;
     const timeStamp = allQuestions[idOfQuestion].timestamp;
-    //let date = new this.formatDate(timeStamp);
-    // getting the vote percentage of each options
+
     const option1Votes = allQuestions[idOfQuestion].optionOne.votes.length;
     const option2Votes = allQuestions[idOfQuestion].optionTwo.votes.length;
     const totalVotePercentage = option1Votes + option2Votes;
@@ -82,8 +72,7 @@ function QuestionPage(props) {
 
             <Col>
                 <Card style={{ textAlign: "center" }} >
-                                        <Card.Header style={{ textAlign: "right" }}>      <small className="text-muted">
-                        {formatDate(timeStamp)}</small></Card.Header>
+                                        <Card.Header style={{ textAlign: "left" }}>Poll Question</Card.Header>
                         <Image style={{ width: "200px", margin: "0 auto", padding: "10px" }} variant="top" src={avatarOfPersonAsking} roundedCircle />
                     
                     <Card.Body>

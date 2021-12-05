@@ -1,13 +1,20 @@
+// Starting source: https://github.com/udacity/reactnd-chirper-app/blob/new-tweet-logic/src/actions/tweets.js
 import { _saveQuestionAnswer } from '../utils/api';
-import { _saveQuestion } from '../utils/api';
 import { addAnswerToUsers, addQuestionToUsers } from './Users';
-// action creators to add question
-// add answer to questions
-// handle add answer
-export const ADD_QUESTION = 'ADD_QUESTION';
+import { _saveQuestion } from '../utils/api';
+// Declare Constants
 export const ADD_ANSWER = 'ADD_ANSWER';
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+export const ADD_QUESTION = 'ADD_QUESTION';
 export const SET_UNANSWERED_QUESTIONS = 'SET_UNANSWERED_QUESTIONS';
+export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+
+// Answers Functions
+function addAnswerToQuestions(questions) {
+    return {
+        type: ADD_ANSWER,
+        questions,
+    };
+}
 
 export function handleAddAnswer(answer, qId) {
     return (dispatch, getState) => {
@@ -23,6 +30,7 @@ export function handleAddAnswer(answer, qId) {
     };
 }
 
+// Questions Functions
 export function handleAddQuestion(optionOne, optionTwo) {
     return (dispatch, getState) => {
         const { authedUser } = getState();
@@ -36,23 +44,15 @@ export function handleAddQuestion(optionOne, optionTwo) {
         });
     };
 }
-
-export function receiveQuestions(questions) {
-    return {
-        type: RECEIVE_QUESTIONS,
-        questions,
-    };
-}
 function addQuestion(question) {
     return {
         type: ADD_QUESTION,
         question,
     };
 }
-
-function addAnswerToQuestions(questions) {
+export function receiveQuestions(questions) {
     return {
-        type: ADD_ANSWER,
+        type: RECEIVE_QUESTIONS,
         questions,
     };
 }

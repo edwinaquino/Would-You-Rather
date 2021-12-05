@@ -1,8 +1,8 @@
+// Actions Index
 import { receiveUsers } from './Users';
 import { receiveQuestions } from './Questions';
-import { _getQuestions } from '../utils/api';
-import { _getUsers } from '../utils/api';
-// function that gets the initial data
+import { _getQuestions,_getUsers } from '../utils/api';
+
 export function getInitialData() {
     return (dispatch) => {
         return Promise.all([_getQuestions(), _getUsers()]).then((values) => {

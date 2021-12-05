@@ -1,4 +1,4 @@
-// users reducer
+// template from: https://github.com/udacity/reactnd-chirper-app/blob/new-tweet-logic/src/reducers/users.js
 import {
     RECEIVE_USERS,
     ADD_ANSWER_TO_USERS,
@@ -12,11 +12,13 @@ export default function users(state = {}, action) {
                 ...state,
                 ...action.users,
             };
+        // Append answeer to user profile
         case ADD_ANSWER_TO_USERS:
             return {
                 ...state,
                 ...action.users,
             };
+        // Apppend question to user profile
         case ADD_QUESTION_TO_USERS:
             return {
                 ...state,

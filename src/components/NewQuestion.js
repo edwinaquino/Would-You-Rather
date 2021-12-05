@@ -15,21 +15,22 @@ import Modal from 'react-bootstrap/Modal';
 
 
 function NewQuestion(props) {
+    
+    // manager Components State
     const [modalShow, setModalShow] = React.useState(false);
     const classes = ""
-    // react.UseState to save the user input text for both options
     const [option1, setUser] = React.useState('');
     const [option2, setUser2] = React.useState('');
     
-
-    // functions to interact with the state
-    const handleChange = (event) => {
+    // Get user poll question text from form fields
+    const GetQuestion1 = (event) => {
         setUser(event.target.value);
         
     };
-    const handleChange2 = (event) => {
+    const GetQuestion2 = (event) => {
         setUser2(event.target.value);
     };
+
     console.log(option1);
     console.log(option2);
 
@@ -43,7 +44,7 @@ function NewQuestion(props) {
                     label="Option One"
                     className="mb-3"
                 >
-                    <Form.Control type="text" placeholder="What if option 1...." onChange={handleChange} />
+                    <Form.Control type="text" placeholder="What if option 1...." onChange={GetQuestion1} />
                 </FloatingLabel>
 
                 <p>Or</p>
@@ -53,7 +54,7 @@ function NewQuestion(props) {
                     className="mb-3"
                 >
 
-                    <Form.Control type="text" placeholder="What if option 2...." onChange={handleChange2} />
+                    <Form.Control type="text" placeholder="What if option 2...." onChange={GetQuestion2} />
 
                 </FloatingLabel>
 
@@ -86,6 +87,7 @@ function NewQuestion(props) {
         </>
     );
 }
+// https://react-bootstrap.netlify.app/components/modal/
 function MyVerticallyCenteredModal(props) {
     return (
         <Modal

@@ -3,12 +3,13 @@ import React from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/AuthenticatedUser';
 
-import './Login.css'
+
 
 // rubrics Login Flow
 // There should be a way for the user to impersonate/ log in as an existing user. (This could be as simple as having a login box that appears at the root of the application. The user could then select a name from the list of existing users.)
@@ -28,21 +29,34 @@ function Login(props) {
         //alert(event.target.value)
         setUser(event.target.value);
     };
-    console.log(user);
-    if (props.users === null) {
-        return (<div>loading... line 25 of login.js</div>);
-    } else {
+    // FOr Debuggin
+    console.log("LINE33 Login.js: ",props.users);
+    //alert(props.users)
+
         return (
 
+<>
 
-            <div >
-     
-                <Form className="center-screen">
-                    <Form.Group className="mb-4" controlId="formBasicEmail">
-                        <Form.Label>Please Select User:</Form.Label>
+{props.users==="null" ? (
+    <p>Loading....</p>
+                ):(
+                    
 
-                        <Form.Select aria-label="Default select example" onChange={handleChange}>
-                            return(<option value="" selected>Select User</option>)
+            <div style={{backgroundColor: "#eee",  display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", textAlign: "center"}}>
+    <h2>Please Login</h2>
+                <Form>
+                
+<Row className="align-items-center">
+    <Col xs="auto" className="my-1">
+      <Form.Label
+        className="me-sm-2"
+        htmlFor="inlineFormCustomSelect"
+        visuallyHidden
+      >
+        Preference
+      </Form.Label>
+      <Form.Select className="me-sm-2" id="inlineFormCustomSelect" onChange={handleChange} name="user">
+      <option value="0">Select User</option>
                             {Object.keys(props.users).map((u) => {
                                 return (
                                     <option id="MenuItem"
@@ -53,24 +67,31 @@ function Login(props) {
                                     </option>
                                 );
                             })}
-                        </Form.Select>
-                    </Form.Group>
-                    <Button variant="primary" type="submit" onClick={() => {
+      </Form.Select>
+    </Col>
+    <Col xs="auto" className="my-1">
+    <Button variant="primary" type="submit" onClick={() => {
                             //alert(user)
                             //console.log('submited');
                             props.dispatch(setAuthedUser(user));
                         }}>
-                        Submit
+                        Go
                     </Button>
-                    
+    </Col>
+  </Row>
+                   
+                   
+
                 </Form>
    
 
             </div>
 
+            )}
+</>
         );
     }
-}
+
 
 function mapStateToProps({ users }) {
     return {

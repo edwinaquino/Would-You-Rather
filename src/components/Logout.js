@@ -1,15 +1,14 @@
-/* component for loggin out */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { setAuthedUserToNull } from '../actions/AuthenticatedUser';
-// log out component
 class Logout extends Component {
     componentDidMount() {
         const { dispatch } = this.props;
         dispatch(setAuthedUserToNull(null));
     }
     render() {
+        // Take user to home page after successful logout to login prompt
         return <Redirect to="/" />;
     }
 }

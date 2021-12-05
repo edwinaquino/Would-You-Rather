@@ -1,21 +1,11 @@
-/*
-action creators for reciving users,
-adding answer to users
-add question to users
-*/
+// Source: https://github.com/udacity/reactnd-chirper-app/blob/new-tweet-logic/src/actions/users.js
 export const RECEIVE_USERS = 'RECEIVE_USERS';
-export const ADD_QUESTION_TO_USERS = 'ADD_QUESTION_TO_USERS';
 export const ADD_ANSWER_TO_USERS = 'ADD_ANSWER_TO_USERS';
+export const ADD_QUESTION_TO_USERS = 'ADD_QUESTION_TO_USERS';
 
 export function receiveUsers(users) {
     return {
         type: RECEIVE_USERS,
-        users,
-    };
-}
-export function addAnswerToUsers(users) {
-    return {
-        type: ADD_ANSWER_TO_USERS,
         users,
     };
 }
@@ -25,3 +15,10 @@ export function addQuestionToUsers(question) {
         question,
     };
 }
+export function addAnswerToUsers(users) {
+    return {
+        type: ADD_ANSWER_TO_USERS,
+        users,
+    };
+}
+

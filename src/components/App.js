@@ -1,44 +1,45 @@
-/* App component */
 import React, { Component } from 'react';
 import { getInitialData } from '../actions';
 import { Route, Switch, Redirect } from 'react-router-dom';
-
 import { connect } from 'react-redux';
+
+// Import Components
 import Dashboard from './Dashboard';
 import NewQuestion from './NewQuestion';
 import QuestionPage from './QuestionPage';
 import LeaderBoard from './LeaderBoard';
 import Login from './Login';
 import LogOut from './Logout';
-import { NotFound } from './404';
-
+import { NotFound } from './NotFound';
 import NavHeader from './NavHeader';
 
+// Import Style
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+// Start Main Class
 class App extends Component {
   state = {};
+  // Check App Component Mounts properly before dispatching
   componentDidMount() {
     console.log('componentDidMount()');
     this.props.dispatch(getInitialData());
   }
   render() {
-    console.clear();
+    // For Debuging
+    //console.clear();
    // console.log('LINE 25 App.js User is logged in?', this.props);
 
     return (
 
       <div>
 
-
-        {/* if there is no authed user, show login page */}
         {this.props.userIn === true ? (
           <Route path="/" component={Login}></Route>
         ) : (
-          <React.Fragment>
-            {/* how navbar in every page except 404 and login */}
+          <>
+
             <Route
               path={[
                 '/home',
@@ -79,7 +80,7 @@ class App extends Component {
                       path="/logout"
                       component={LogOut}
                     ></Route>
-                    {/* 404 */}
+                    {/* Question not found show error page */}
                     <Redirect exact from="/" to="/home" />
                     <Route component={NotFound} />
                   </Switch>
@@ -87,13 +88,13 @@ class App extends Component {
                 </Col>
               </Row>
             </Container>
-          </React.Fragment>
+          </>
         )}
       </div>
     );
   }
 }
-// checking if ther is an authedUser
+
 function mapStateToProps({ authedUser }) {
   return {
     userIn: authedUser === null,

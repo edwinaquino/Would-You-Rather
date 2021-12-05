@@ -1,13 +1,12 @@
-// questions reducer
+// reducer starter code found here: https://github.com/udacity/reactnd-chirper-app/blob/new-tweet-logic/src/reducers/tweets.js
 import {
     RECEIVE_QUESTIONS,
     ADD_QUESTION,
     ADD_ANSWER,
 } from '../actions/Questions';
-// handle switch cases for action types
 export default function questions(state = {}, action) {
     switch (action.type) {
-        case RECEIVE_QUESTIONS:
+        case ADD_ANSWER:
             return {
                 ...state,
                 ...action.questions,
@@ -17,7 +16,7 @@ export default function questions(state = {}, action) {
                 ...state,
                 [action.question.id]: action.question,
             };
-        case ADD_ANSWER:
+        case RECEIVE_QUESTIONS:
             return {
                 ...state,
                 ...action.questions,
